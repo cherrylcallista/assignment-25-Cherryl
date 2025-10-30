@@ -1,5 +1,6 @@
 import { StudentTypes } from "@/utils/Types";
-import { Table, Tag, Spin, Button, Space, message } from "antd"
+import type { PopconfirmProps } from 'antd';
+import { Table, Tag, Spin, Button, Space, message, Popconfirm } from "antd"
 
 type TableComponentsTypes = {
     students: StudentTypes[],
@@ -61,13 +62,20 @@ function TableComponents({ students, setStudents, loading, loadStudents, setIsEd
                         Edit
                     </Button>
 
-                    <Button 
-                        type="primary" 
-                        danger
-                        onClick={() => removeStudents(record)}
+                    <Popconfirm
+                        title="Delete student"
+                        description="Are you sure to delete this student?"
+                        onConfirm={() => removeStudents(record)}
+                        okText="Yes"
+                        cancelText="No"
                     >
-                        Delete
-                    </Button>
+                        <Button 
+                            type="primary" 
+                            danger
+                        >
+                            Delete
+                        </Button>
+                    </Popconfirm>
                 </Space>
             ),
         },
